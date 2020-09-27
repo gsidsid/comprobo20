@@ -9,16 +9,18 @@ from __future__ import print_function, division
 import rospy
 from neato_node.msg import Bump
 from geometry_msgs.msg import Twist, Vector3
+from std_msgs.msg import Int8MultiArray
 
 class EmergencyStopNode(object):
     def __init__(self):
         rospy.init_node('emergency_stop')
-        rospy.Subscriber('/bump', Bump, self.process_bump)
+        rospy.Subscriber('/bump', Int8MultiArray, self.process_bump)
         self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         self.desired_velocity = 0.3
 
     def process_bump(self, msg):
-        if any((msg.leftFront, msg.leftSide, msg.rightFront, msg.rightSide)):
+        print(msg)
+        if any((msg.data[0], msg.data[1], msg.data[2], msg.data[3])):
             self.desired_velocity = 0.0
 
     def run(self):
