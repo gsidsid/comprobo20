@@ -1,13 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-"""
-Created on 29 July 2012
-@author: Lisa Simpson
-"""
-
-from __future__ import print_function, division
 import rospy
-from neato_node.msg import Bump
+from std_msgs.msg import Int8MultiArray
 from geometry_msgs.msg import Twist, Vector3
 from std_msgs.msg import Int8MultiArray
 
